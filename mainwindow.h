@@ -16,7 +16,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void write(QByteArray data);
     QString message;
     void setColor(qint8 color);
     void info(QString text);
@@ -25,6 +24,7 @@ public slots:
 private slots:
 
 
+    void write(QByteArray data);
 
     void on_white_clicked();
 
