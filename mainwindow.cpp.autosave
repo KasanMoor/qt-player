@@ -87,62 +87,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//void MainWindow::connect()
-//{
-//    QByteArray data;
-//    qDebug() << "begining";
-//    transmitter = new QSerialPort();
-//    QList<QSerialPortInfo> availablePorts = QSerialPortInfo::availablePorts();
-//    QSerialPortInfo port;
-//    bool foundDevice = false;
-//    for(QSerialPortInfo p : availablePorts)
-//    {
-//        qDebug() << p.description();
-//        qDebug() << p.manufacturer();
-//        if(p.manufacturer() == "FTDI")
-//        {
-//            port = p;
-//            foundDevice = true;
-//        }
-//    }
-//    if(!foundDevice)
-//    {
-//        ui->message->setText(message.append("Error: no ftdi devices found\n"));
-//        qDebug() << "Error: no ftdi devices found";
-//    }
-//    transmitter->setPort(port);
-//    if(!transmitter->setBaudRate(57600))
-//    {
-//        ui->message->setText(message.append("Error: unable to set baud rate\n"));
-//        qDebug() << "Error: unable to set baud rate";
-//    }
-//    if(!transmitter->setDataBits(QSerialPort::Data8))
-//    {
-//        ui->message->setText(message.append("Error: unable to set number of bits\n"));
-//        qDebug() << "Error: unable to set number of bits";
-//    }
 
-//    if(!transmitter->setParity(QSerialPort::NoParity))
-//    {
-//        ui->message->setText(message.append("Error: unable to set parity\n"));
-//        qDebug() << "Error: unable to set parity";
-//    }
-//    if(!transmitter->open(QIODevice::WriteOnly))
-//    {
-//        ui->message->setText(message.append("Error: unable to open port\n"));
-//        qDebug() << "Error: unable to open port";
-//    } else
-//    {
-//        ui->message->setText(message.append("Info: port opened succesfully\n"));
-//        qDebug() << "Info: port opened succesfully";
-//    }
-//    data.resize(32);
-//    makeDark();
-////    QTimer *timer = new QTimer();
-////    connect(timer, SIGNAL(timeout()), this, SLOT(writeLoop));
-////    timer->start(50);
-
-//}
 
 void MainWindow::write(QByteArray data)
 {
@@ -159,6 +104,7 @@ void MainWindow::write(QByteArray data)
 void MainWindow::setColor(qint8 color)
 {
     QByteArray data;
+    data.resize(32);
     for(int i=0; i<32; i++)
     {
         data[i] = color;
@@ -194,5 +140,19 @@ void MainWindow::error(QString text)
     ui->message->setText(this->message.append("Error: " + text + "\n"));
     ui->message->verticalScrollBar()->setValue(
     ui->message->verticalScrollBar()->maximum());
+}
+
+void MainWindow::playEffect(/*Effect effect*/)
+{
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(write()));
+    //for(Frame frames : effect)
+    while(playing)
+    {
+        //for(Frame frames : effect.Frames)
+        {
+            timer->singleShot()
+        }
+    }
 }
 
