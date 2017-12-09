@@ -25,11 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    effect.cpp \
+    frame.cpp
 
 HEADERS += \
         mainwindow.h \
-    transmitter.h
+    transmitter.h \
+    effect.h \
+    frame.h
 
 FORMS += \
         mainwindow.ui
